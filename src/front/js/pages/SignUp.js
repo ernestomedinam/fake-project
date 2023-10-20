@@ -9,11 +9,13 @@ export const SignUp = (props) => {
         <div className="container">
             <div className="w-100 d-flex flex-column">
                 <input 
+                    className="form-control my-2"
                     value={username}
                     onChange={(event) => setUsername(event.target.value)}
                     type="text" 
                     placeholder="username" />
                 <input 
+                    className="form-control my-2"
                     value={password}
                     onChange={(event) => setPassword(event.target.value)}
                     type="password" 
