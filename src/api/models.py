@@ -10,7 +10,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120), unique=True, nullable=False)
     salt = db.Column(db.String(120), nullable=False)
-    hashed_password = db.Column(db.String(80), unique=False, nullable=False)
+    hashed_password = db.Column(db.String(240), unique=False, nullable=False)
 
     def __init__(self, username, password):
         already = User.query.filter_by(username=username).one_or_none()
@@ -23,10 +23,10 @@ class User(db.Model):
         self.username = username
         db.session.add(self)
         try:
-            db.session.commmit()
+            db.session.commit()
         except Exception as error:
             db.session.rollback()
-            raise APIException(error, 500)
+            raise APIException(f"{error}", 500)
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -34,6 +34,6 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "email": self.email,
+            "username": self.username,
             # do not serialize the password, its a security breach
         }

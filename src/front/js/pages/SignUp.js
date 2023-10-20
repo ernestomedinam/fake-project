@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
 
 export const SignUp = (props) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const {store, actions} = useContext(Context);
     return (
         <div className="container">
             <div className="w-100 d-flex flex-column">
