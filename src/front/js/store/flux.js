@@ -16,6 +16,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			signUserUp: async (username, password) => {
+				const response = await fetch(
+					"https://musical-happiness-r75r6w6vpxj35j5r-3001.app.github.dev/api/users", {
+						method: "POST",
+						body: JSON.stringify({
+							username,
+							password
+						}),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+				const body = await response.json();
+				if (response.ok) return body;
+				return;
+			},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
