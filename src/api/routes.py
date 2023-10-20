@@ -17,6 +17,15 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
+@api.route("/users", methods=["POST"])
+def create_user():
+    new_user_data = request.json
+    new_user = User(
+        username=new_user_data["username"],
+        password=new_user_data["password"]
+    )
+    return new_user.serialize(), 201
+
 @api.route('/goodbye', methods=['POST', 'GET'])
 def handle_goodbye():
 
